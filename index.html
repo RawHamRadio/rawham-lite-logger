@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Raw Ham's Lite Logger</title>
+<meta name="description" content="A free, lite field logger for POTA, SOTA, WWFF, GMA, WWBOTA and LLOTA. Windows, Android and Linux.">
+<meta property="og:title" content="The Raw Ham's Lite Logger">
+<meta property="og:description" content="A free, lite field logger for POTA, SOTA, WWFF, GMA, WWBOTA and LLOTA. Windows, Android and Linux.">
+<meta property="og:image" content="https://rawhamradio.github.io/rawham-lite-logger/raw-ham.jpg">
+<meta property="og:url" content="https://rawhamradio.github.io/rawham-lite-logger/">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #3a2418;
+    --ink-soft: #6b4c3b;
+    --sunset: #f08a3c;
+    --sunset-deep: #d9662a;
+    --peach: #fde8d6;
+    --cream: #fffaf4;
+    --shirt: #5f7f3a;
+    --shirt-deep: #4a6a2c;
+    --pig: #f4b6a6;
+    --line: #ecd3bf;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--cream);
+  }
+  a { color: var(--sunset-deep); }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+  .hand { font-family: "Caveat", "Segoe Print", cursive; font-weight: 700; }
+
+  /* Top */
+  header.hero {
+    background: linear-gradient(180deg, #f7b26a 0%, #f08a3c 45%, #e0703a 70%, #b9785a 100%);
+    color: #2b170d;
+    padding: 36px 0 44px;
+  }
+  .hero .wrap { display: grid; grid-template-columns: 240px 1fr; gap: 32px; align-items: center; }
+  .hero img {
+    width: 240px; height: 240px; border-radius: 50%;
+    border: 6px solid var(--cream);
+    box-shadow: 0 8px 24px rgba(60, 25, 10, .3);
+    object-fit: cover;
+  }
+  .hero h1 { margin: 0; font-size: 3.4rem; line-height: 1; }
+  .hero h1 small { display: block; font-size: 1.6rem; opacity: .85; }
+  .hero .tagline { font-size: 2rem; margin: 6px 0 0; line-height: 1; color: var(--cream); text-shadow: 0 1px 2px rgba(60,25,10,.35); }
+  .ride {
+    background: var(--peach); border-left: 6px solid var(--sunset);
+    border-radius: var(--radius); padding: 16px 20px; margin: 0 0 20px;
+  }
+  .ride h3 { margin: 0 0 4px; font-size: 1.8rem; color: var(--ink); line-height: 1.1; }
+  .ride p { margin: 0; }
+  .hero p.lead { font-size: 1.2rem; margin: 14px 0 6px; max-width: 34em; }
+  .hero p.free { margin: 0 0 20px; font-weight: 600; }
+
+  .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; flex-direction: column; justify-content: center;
+    min-width: 180px; padding: 12px 18px;
+    border-radius: var(--radius);
+    text-decoration: none; font-weight: 700; font-size: 1.05rem;
+    background: var(--shirt); color: #fff;
+    box-shadow: 0 3px 0 var(--shirt-deep);
+    transition: transform .08s ease, box-shadow .08s ease;
+  }
+  .btn span { font-weight: 400; font-size: .85rem; opacity: .9; }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 0 var(--shirt-deep); }
+  .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--shirt-deep); }
+  .btn.alt { background: var(--cream); color: var(--ink); box-shadow: 0 3px 0 #c9a990; }
+  .small-links { margin-top: 14px; font-size: .95rem; }
+  .small-links a { color: #2b170d; font-weight: 600; }
+
+  /* Sections */
+  section { padding: 48px 0; }
+  section + section { border-top: 1px solid var(--line); }
+  h2 { font-size: 2.4rem; margin: 0 0 6px; color: var(--sunset-deep); line-height: 1.1; }
+  .sub { margin: 0 0 24px; color: var(--ink-soft); }
+
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .card {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px 20px;
+  }
+  .card h3 { margin: 0 0 6px; font-size: 1.1rem; }
+  .card p { margin: 0; color: var(--ink-soft); }
+
+  .shots { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
+  .shot {
+    border-radius: var(--radius); background: var(--peach);
+    border: 2px dashed #e7b894; color: var(--ink-soft);
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    padding: 20px; min-height: 260px;
+  }
+  .shot img { width: 100%; height: auto; border-radius: 10px; display: block; }
+  .shot.has-img { padding: 0; border: 1px solid var(--line); background: #fff; }
+
+  .install { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; }
+  .install ol { margin: 8px 0 0; padding-left: 1.2em; }
+  .install li { margin-bottom: 6px; }
+  .note { background: var(--peach); border-radius: var(--radius); padding: 14px 18px; margin-top: 18px; }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .coffee {
+    background: var(--shirt); color: #fff; border-radius: var(--radius);
+    padding: 28px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: center;
+  }
+  .coffee h2 { color: #fff; }
+  .coffee p { margin: 0; }
+  .coffee .btn { background: var(--sunset); box-shadow: 0 3px 0 var(--sunset-deep); }
+
+  .socials { display: flex; flex-wrap: wrap; gap: 10px; }
+  .socials a, .socials .soon {
+    padding: 10px 16px; border-radius: 999px; text-decoration: none; font-weight: 600;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+  }
+  .socials a:hover { border-color: var(--sunset); }
+  .socials .soon { opacity: .5; }
+
+  footer { padding: 28px 0 40px; color: var(--ink-soft); font-size: .92rem; border-top: 1px solid var(--line); }
+  footer .sign { font-size: 1.8rem; color: var(--ink); }
+
+  /* Coming soon: remove class="coming-soon" from <body> and the .soon-bar div at launch */
+  .soon-bar { background: var(--ink); color: var(--cream); text-align: center; padding: 10px 16px; font-size: .95rem; }
+  .soon-bar b { color: #f7b26a; }
+  .coming-soon .dl { pointer-events: none; opacity: .55; }
+  .coming-soon .dl-tag { display: inline; }
+  .dl-tag { display: none; }
+
+  @media (max-width: 720px) {
+    .hero .wrap { grid-template-columns: 1fr; text-align: center; }
+    .hero img { width: 180px; height: 180px; margin: 0 auto; }
+    .hero h1 { font-size: 2.8rem; }
+    .hero p.lead { margin-left: auto; margin-right: auto; }
+    .buttons { justify-content: center; }
+    .btn { flex: 1 1 100%; }
+    .shots, .two, .coffee { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body class="coming-soon">
+
+<div class="soon-bar"><b>Coming soon!</b> Downloads open at launch. Testers, keep using the link I sent you.</div>
+
+<header class="hero">
+  <div class="wrap">
+    <!-- TODO: logo credit for Richie's daughter goes in the footer once she says how she wants it -->
+    <img src="raw-ham.jpg" alt="The Raw Ham: a bearded pig in a green KJ5GVQ shirt holding a mic">
+    <div>
+      <h1 class="hand">The Raw Ham's<small>Lite Logger</small></h1>
+      <p class="tagline hand">Packs light. Logs lite.</p>
+      <p class="lead">A small, simple field logger and self-spotter for POTA, SOTA, WWFF, GMA, WWBOTA and LLOTA.
+        Runs on old laptops and cheap tablets just fine. Small enough to ride along on the Spyder.</p>
+      <p class="free">Free. No account, no ads, no catch.</p>
+      <div class="buttons">
+        <a class="dl btn" href="https://github.com/RawHamRadio/rawham-lite-logger/releases/latest/download/Raw_Ham_Lite_Logger_Setup.exe">
+          Windows<span>Windows 10 or 11</span></a>
+        <a class="dl btn" href="https://github.com/RawHamRadio/rawham-lite-logger/releases/latest/download/RawHamLiteLogger.apk">
+          Android<span>Tablet or phone, Android 8+</span></a>
+        <a class="dl btn alt" href="https://github.com/RawHamRadio/rawham-lite-logger/releases/latest">
+          Linux<span>Ubuntu, Mint, Raspberry Pi</span></a>
+      </div>
+      <div class="small-links">
+        <a class="dl" href="https://github.com/RawHamRadio/rawham-lite-logger/raw/main/Guide.pdf">Read the guide (PDF)</a><span class="dl-tag"> (soon)</span>
+        &nbsp;·&nbsp; <a href="#install">How to install</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="what">
+  <div class="wrap">
+    <h2 class="hand">What it does</h2>
+    <p class="sub">Everything I wanted at the picnic table, and nothing I didn't.</p>
+    <div class="ride">
+      <h3 class="hand">Built to ride light</h3>
+      <p>I do a lot of my activations off the back of my Can-Am Spyder. There's no room on a bike for a big laptop and a tangle of cables,
+        so I built a logger that packs light. A tablet, a radio, a wire in a tree or a Hamstick, and you're on the air.
+        If it fits in a saddlebag, it'll run this.</p>
+    </div>
+    <div class="features">
+      <div class="card">
+        <h3>Parks and summits as you type</h3>
+        <p>Just type the number. 1234 turns into US-1234. Works with no signal.</p>
+      </div>
+      <div class="card">
+        <h3>Spot yourself</h3>
+        <p>POTA and WWBOTA spots go straight out. GMA and WWFF go through the cluster. QRT too, with one tap.</p>
+      </div>
+      <div class="card">
+        <h3>Who's that?</h3>
+        <p>Names and QTH from an offline US and Canada callbook, or QRZ if you have it. Saved for when you're out of range.</p>
+      </div>
+      <div class="card">
+        <h3>Worked before</h3>
+        <p>Pulls your history from QRZ or an ADIF file so you know who's a new one.</p>
+      </div>
+      <div class="card">
+        <h3>Park to park</h3>
+        <p>Log a P2P with several parks and it writes one ADIF record per park, the way POTA wants it.</p>
+      </div>
+      <div class="card">
+        <h3>Gets your log home</h3>
+        <p>POTA-ready ADIF with the right file names. Send to QRZ, ACLog, Log4OM, HRD, Wavelog and others.</p>
+      </div>
+      <div class="card">
+        <h3>Radio control</h3>
+        <p>Reads band and mode from your rig. Yaesu, Icom, Xiegu and more. USB-OTG on Android.</p>
+      </div>
+      <div class="card">
+        <h3>Dark mode</h3>
+        <p>Easy on the eyes when you're working the night shift.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="screens">
+  <div class="wrap">
+    <h2 class="hand">Take a look</h2>
+    <p class="sub">The PC version and the tablet version.</p>
+    <div class="shots">
+      <!-- Swap a placeholder for: <div class="shot has-img"><img src="shot-pc.png" alt="..."></div> -->
+      <div class="shot">Screenshot of the PC logger goes here</div>
+      <div class="shot">Screenshot of the Android app goes here</div>
+    </div>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <h2 class="hand">Installing</h2>
+    <p class="sub">About two minutes. Do the first setup at home where you have internet, then it works in the field with no signal.</p>
+    <div class="install">
+      <div class="card">
+        <h3>Windows 10 / 11</h3>
+        <ol>
+          <li>Download the Windows setup above and open it.</li>
+          <li>If a blue box says "Windows protected your PC", click <b>More info</b>, then <b>Run anyway</b>. It says that for anything that isn't from a big company.</li>
+          <li>Click Next, Install, Finish. Settings opens by itself the first time.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Android</h3>
+        <ol>
+          <li>Open this page on the tablet or phone and tap the Android button.</li>
+          <li>Tap the file when it's done. If Android asks, allow installs from your browser.</li>
+          <li>Tap Install, open it, and tap Settings.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Linux</h3>
+        <ol>
+          <li>Grab the Linux files from the release page.</li>
+          <li>Open a terminal in that folder and type <code>bash install-linux.sh</code>.</li>
+          <li>Start it from your app menu.</li>
+        </ol>
+      </div>
+    </div>
+    <p class="note">It tells you when there's an update. If the version number in the corner turns red, there's a new one waiting. On Windows it updates with one click.</p>
+  </div>
+</section>
+
+<section id="fine-print">
+  <div class="wrap two">
+    <div class="card">
+      <h3>Your log stays yours</h3>
+      <p>Your log and settings stay on your own computer or tablet. Nothing gets sent to me. Your QRZ login is only used to talk to QRZ. Please don't share your own <code>rawhams_lite_data.json</code> or <code>rawhams_lite.db</code> files, they hold your settings and passwords.</p>
+    </div>
+    <div class="card">
+      <h3>Free to use</h3>
+      <p>Use it, share the download link with your buddies, take it to every park you can. Just don't sell it. Questions or found a bug? <!-- TODO: pick one place -->Let me know and I'll take a look.</p>
+    </div>
+  </div>
+</section>
+
+<section id="coffee">
+  <div class="wrap">
+    <div class="coffee">
+      <div>
+        <h2 class="hand">Buy me a coffee?</h2>
+        <p>It's free and always will be. If it made your activation easier and you want to buy me a coffee, it helps cover the tools I use to keep it going.</p>
+      </div>
+      <a class="btn" href="https://www.paypal.me/TheRawHam">Coffee via PayPal<span>paypal.me/TheRawHam</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="find-me">
+  <div class="wrap">
+    <h2 class="hand">Find me on the air and online</h2>
+    <p class="sub">POTA, nets and ham radio shenanigans.</p>
+    <div class="socials">
+      <a href="https://www.qrz.com/db/KJ5GVQ">QRZ: KJ5GVQ</a>
+      <!-- TODO: real links once the Page is renamed and the handles are grabbed -->
+      <span class="soon">Facebook (soon)</span>
+      <span class="soon">YouTube (soon)</span>
+      <span class="soon">TikTok (soon)</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sign hand">73, Richie, The Raw Ham</div>
+    <p>The Raw Ham's Lite Logger is free and not for sale.</p>
+  </div>
+</footer>
+
+</body>
+</html>
