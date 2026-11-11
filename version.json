@@ -1,5 +1,5 @@
 {
-  "pc": "1.31",
-  "android": "1.38",
-  "notes": "QRT now uses your spot comment."
+  "pc": "1.36",
+  "android": "1.42",
+  "notes": "First public release! Continue a past activation, New activation saves a copy first, spots keep working after Off/On."
 }
