@@ -1,0 +1,24 @@
+# Publishes the download page's files as a GitHub release (the page's buttons and the
+# apps' update check use releases/latest/download/...). Runs when anything in release/ changes.
+name: Publish release
+on:
+  push:
+    branches: [main]
+    paths: ['release/**']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="v$(tr -d '[:space:]' < release/VERSION)"
+          gh release delete "$TAG" -y --cleanup-tag || true
+          tail -n +3 release/NOTES.md > notes.txt
+          gh release create "$TAG" release/Raw_Ham_Lite_Logger_Setup.exe release/RawHamLiteLogger.apk \
+            release/Raw_Ham_Lite_Logger_Linux.zip --title "$(head -1 release/NOTES.md)" --notes-file notes.txt --latest
