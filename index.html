@@ -106,6 +106,8 @@
   .shot.has-img { padding: 0; border: 1px solid var(--line); background: #fff; }
   .field { margin: 14px 0 0; max-width: 560px; }
   .field img { width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); display: block; }
+  .mapcards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 22px; }
+  .mapcards .field { max-width: none; margin: 0; }
   .field figcaption { color: var(--ink-soft); font-size: .95em; margin-top: 8px; text-align: center; }
 
   .install { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; }
@@ -148,8 +150,9 @@
     .hero p.lead { margin-left: auto; margin-right: auto; }
     .buttons { justify-content: center; }
     .btn { flex: 1 1 100%; }
-    .shots, .two, .coffee { grid-template-columns: 1fr; }
+    .shots, .two, .coffee, .mapcards { grid-template-columns: 1fr; }
   }
+  .new{font-size:.7em;background:#e8590c;color:#fff;border-radius:4px;padding:1px 5px;vertical-align:middle;margin-left:4px}
 </style>
 </head>
 <body>
@@ -226,6 +229,22 @@
         <p>Reads band and mode from your rig. Yaesu, Icom, Xiegu and more. USB-OTG on Android.</p>
       </div>
       <div class="card">
+        <h3>QSLs by email <span class="new">NEW</span></h3>
+        <p>One tap after an activation and every ham gets their own QSL email, with your QSL card, up to 4 photos from your activation and a map, right in the email. Free email lookup through QRZ or HamQTH.</p>
+      </div>
+      <div class="card">
+        <h3>Map cards or your own <span class="new">NEW</span></h3>
+        <p>Your activation map turns into a QSL card with each contact on it. Or make your own: any picture you like, then click where their call, date and time go. Print them 3 to a page.</p>
+      </div>
+      <div class="card">
+        <h3>PC and tablet, together <span class="new">NEW</span></h3>
+        <p>Start at the park on the tablet, finish at home on the PC, through your own Google Drive or Dropbox. Free, no account, no subscription.</p>
+      </div>
+      <div class="card">
+        <h3>Fix it fast <span class="new">NEW</span></h3>
+        <p>Wrong frequency all run? Change them all at once. Helping a new activator? Make them their own POTA log under their call with a click.</p>
+      </div>
+      <div class="card">
         <h3>Dark mode</h3>
         <p>Easy on the eyes when you're working the night shift.</p>
       </div>
@@ -236,12 +255,23 @@
 <section id="screens">
   <div class="wrap">
     <h2 class="hand">Take a look</h2>
-    <p class="sub">The PC version and the tablet version.</p>
+    <p class="sub">The PC version, the tablet version, and the new v2 map cards.</p>
     <div class="shots">
       <!-- Swap a placeholder for: <div class="shot has-img"><img src="shot-pc.png" alt="..."></div> -->
       <div class="shot has-img"><img src="shot-pc.jpg" alt="The Raw Ham's Lite Logger on a Windows PC, hunting parks"></div>
       <div class="shot has-img"><img src="shot-android.jpg" alt="The Raw Ham's Lite Logger on an Android tablet during a POTA activation at US-10951"></div>
     </div>
+    <div class="mapcards">
+      <figure class="field">
+        <img src="mapcard-activation.jpg" alt="An activation map card: KJ5GVQ at US-11768 with lines to 26 contacts across the US, and one ham's contact details under the map" loading="lazy">
+        <figcaption><b>After an activation</b>, every ham gets their own card, with everyone you worked on the map.</figcaption>
+      </figure>
+      <figure class="field">
+        <img src="mapcard-single.jpg" alt="A single-contact map card: one line from KJ5GVQ in Oklahoma to the other station, with the contact details under the map" loading="lazy">
+        <figcaption><b>Just one contact?</b> Send that ham a card with just the two of you.</figcaption>
+      </figure>
+    </div>
+    <p class="sub" style="text-align:center;margin-top:10px"><b>New in v2:</b> map card QSLs, made and emailed for you.</p>
   </div>
 </section>
 
@@ -283,7 +313,7 @@
   <div class="wrap two">
     <div class="card">
       <h3>Your log stays yours</h3>
-      <p>Your log and settings stay on your own computer or tablet. Nothing gets sent to me. Your QRZ login is only used to talk to QRZ, and your logins are saved encrypted on your device. Please don't share your own <code>rawhams_lite_data.json</code> or <code>rawhams_lite.db</code> files, they hold your settings and your log.</p>
+      <p>Your log and settings stay on your own computer or tablet. Nothing gets sent to me. Your QRZ and HamQTH logins are only used to talk to them, and your QSL emails go out through your own email account using an app password (a separate password just for the logger, never your real one). All of them are saved encrypted on your device. Moving between your PC and tablet goes through your own Google Drive or Dropbox, and passwords only go along if you choose to, locked with a PIN you make up. Please don't share your own <code>rawhams_lite_data.json</code> or <code>rawhams_lite.db</code> files, they hold your settings and your log.</p>
     </div>
     <div class="card">
       <h3>Free to use</h3>
