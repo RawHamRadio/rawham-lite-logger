@@ -106,6 +106,7 @@
   .shot.has-img { padding: 0; border: 1px solid var(--line); background: #fff; }
   .field { margin: 14px 0 0; max-width: 560px; }
   .field img { width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); display: block; }
+  .field.mapcard { max-width: 760px; margin: 22px auto 0; }
   .field figcaption { color: var(--ink-soft); font-size: .95em; margin-top: 8px; text-align: center; }
 
   .install { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 16px; }
@@ -253,12 +254,16 @@
 <section id="screens">
   <div class="wrap">
     <h2 class="hand">Take a look</h2>
-    <p class="sub">The PC version and the tablet version.</p>
+    <p class="sub">The PC version, the tablet version, and a v2 map card.</p>
     <div class="shots">
       <!-- Swap a placeholder for: <div class="shot has-img"><img src="shot-pc.png" alt="..."></div> -->
       <div class="shot has-img"><img src="shot-pc.jpg" alt="The Raw Ham's Lite Logger on a Windows PC, hunting parks"></div>
       <div class="shot has-img"><img src="shot-android.jpg" alt="The Raw Ham's Lite Logger on an Android tablet during a POTA activation at US-10951"></div>
     </div>
+    <figure class="field mapcard">
+      <img src="mapcard.jpg" alt="A map card QSL: KJ5GVQ at US-11768 Arcadia Round Barn, a line on the map to the other station, and the contact details under the map" loading="lazy">
+      <figcaption><b>New in v2:</b> a map card QSL, made and emailed for you. This one is for a single contact; after an activation, every ham gets their own.</figcaption>
+    </figure>
   </div>
 </section>
 
