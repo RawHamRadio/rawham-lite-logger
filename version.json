@@ -1,5 +1,5 @@
 {
-  "pc": "2.0",
-  "android": "2.0",
-  "notes": "v2: QSLs by email with your card or a map card, print cards, move between PC and tablet through your own cloud, power from the radio, change many contacts at once, a log for a friend, open any ADIF."
+  "pc": "2.01",
+  "android": "2.01",
+  "notes": "2.01: photo when you work a spot, WSJT-X station in the Call box, sideband-smart license check with a red banner, Freq/Mode next to Pwr, and a heads-up when spot filters hide spots."
 }
