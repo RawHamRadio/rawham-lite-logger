@@ -1,5 +1,5 @@
 {
-  "pc": "2.01",
-  "android": "2.01",
-  "notes": "2.01: photo when you work a spot, WSJT-X station in the Call box, sideband-smart license check with a red banner, Freq/Mode next to Pwr, and a heads-up when spot filters hide spots."
+  "pc": "2.02",
+  "android": "2.02",
+  "notes": "2.02: QSL test button + card preview, Mark NOT sent, Test LoTW, orange main buttons, and sent marks kept in your files."
 }
